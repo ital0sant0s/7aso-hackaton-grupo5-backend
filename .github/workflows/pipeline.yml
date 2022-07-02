@@ -60,8 +60,7 @@ jobs:
           service: '${{ env.SERVICE_NAME }}'
           image: ${{ env.ARTIFACT_REGISTRY_URL }}/${{ env.ARTIFACT_REPOSITORY_NAME }}:latest
           flags: |
-            --allow-unauthenticated
-            --set-cloudsql-instances=${{ env.DB_INSTANCE_NAME }}
+            --allow-unauthenticated --set-cloudsql-instances=${{ env.DB_INSTANCE_NAME }}
           env_vars: |
             CLOUD_SQL_CONNECTION_NAME=${{ secrets.CLOUD_SQL_CONNECTION_NAME }}
             CLOUD_SQL_DATABASE_NAME=${{ secrets.CLOUD_SQL_DATABASE_NAME }}
