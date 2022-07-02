@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 'feature/**'
 
 env:
   PROJECT_ID: hackathon-7aso-grupo-05-backend
@@ -12,7 +11,7 @@ env:
   SERVICE_NAME: spotmusic-backend
   ARTIFACT_REPOSITORY_NAME: spotmusic
   ARTIFACT_REGISTRY_URL: 'us-central1-docker.pkg.dev/hackathon-7aso-grupo-05/teste'
-  DB_INSTANCE_NAME: 'db-mysql-spotmusic-7aso-hackaton-grupo5'
+  DB_INSTANCE_NAME: 'db-mysql-spotmusic-7aso-hackaton-grupo5-9182jiads'
 
 jobs:
   Build:
