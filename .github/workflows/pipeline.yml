@@ -22,12 +22,29 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
+      - name: Install Requirements
+        run:  pip install flask flask-wtf flask-cors PyMySQL cryptography gunicorn pytest pytest-cov
+
+
+      - name: Unit Test
+        run: |
+          coverage run --source=app -m pytest test.py
+          coverage report -m
+          coverage xml -i
+          
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Setup GCloud Auth
         id: auth
         uses: google-github-actions/auth@v0.4.0
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
+      
       - name: Docker Login
         run: | 
           echo '${{ secrets.GCP_CREDENTIALS }}' > key.json
