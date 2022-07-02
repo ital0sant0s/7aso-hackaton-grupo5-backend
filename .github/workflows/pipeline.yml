@@ -61,11 +61,11 @@ jobs:
           flags: |
             --allow-unauthenticated
           env_vars: |
-            CLOUD_SQL_CONNECTION_NAME='${{ secrets.CLOUD_SQL_CONNECTION_NAME }}'
-            CLOUD_SQL_DATABASE_NAME='${{ secrets.CLOUD_SQL_DATABASE_NAME }}'
-            CLOUD_SQL_PASSWORD='${{ secrets.CLOUD_SQL_PASSWORD }}'
-            CLOUD_SQL_USERNAME='${{ secrets.CLOUD_SQL_USERNAME }}'
-            DB_LOCAL_HOST='${{ secrets.DB_LOCAL_HOST }}'
+            CLOUD_SQL_CONNECTION_NAME=${{ secrets.CLOUD_SQL_CONNECTION_NAME }}
+            CLOUD_SQL_DATABASE_NAME=${{ secrets.CLOUD_SQL_DATABASE_NAME }}
+            CLOUD_SQL_PASSWORD=${{ secrets.CLOUD_SQL_PASSWORD }}
+            CLOUD_SQL_USERNAME=${{ secrets.CLOUD_SQL_USERNAME }}
+            DB_LOCAL_HOST=${{ secrets.DB_LOCAL_HOST }}
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
