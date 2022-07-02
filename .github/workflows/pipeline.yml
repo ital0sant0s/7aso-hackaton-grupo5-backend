@@ -53,15 +53,18 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.2.1
-
       - name: Deploy GCloud Cloud Run
         id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: '${{ env.SERVICE_NAME }}'
           image: ${{ env.ARTIFACT_REGISTRY_URL }}/${{ env.ARTIFACT_REPOSITORY_NAME }}:latest
+          secrets: |
+            CLOUD_SQL_CONNECTION_NAME='${{ secrets.CLOUD_SQL_CONNECTION_NAME }}'
+            CLOUD_SQL_DATABASE_NAME='${{ secrets.CLOUD_SQL_DATABASE_NAME }}'
+            CLOUD_SQL_PASSWORD='${{ secrets.CLOUD_SQL_PASSWORD }}'
+            CLOUD_SQL_USERNAME='${{ secrets.CLOUD_SQL_USERNAME }}'
+            DB_LOCAL_HOST='${{ secrets.DB_LOCAL_HOST }}'
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
