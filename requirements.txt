@@ -4,3 +4,5 @@ flask-cors
 PyMySQL
 cryptography
 gunicorn
+pytest 
+pytest-cov
