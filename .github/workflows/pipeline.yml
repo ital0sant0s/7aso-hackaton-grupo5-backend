@@ -48,12 +48,9 @@ jobs:
 
       - name: Setup GCloud Auth
         id: auth
-        uses: google-github-actions/auth@v0.4.0
+        uses: google-github-actions/auth@v0
         with:
           credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
 
       - name: Deploy GCloud Cloud Run
         id: 'deploy'
@@ -61,6 +58,8 @@ jobs:
         with:
           service: '${{ env.SERVICE_NAME }}'
           image: ${{ env.ARTIFACT_REGISTRY_URL }}/${{ env.ARTIFACT_REPOSITORY_NAME }}:latest
+          flags: |
+            --allow-unauthenticated
           secrets: |
             CLOUD_SQL_CONNECTION_NAME='${{ secrets.CLOUD_SQL_CONNECTION_NAME }}'
             CLOUD_SQL_DATABASE_NAME='${{ secrets.CLOUD_SQL_DATABASE_NAME }}'
