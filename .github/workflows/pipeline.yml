@@ -22,6 +22,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
+      - name: Install Requirements
+        run:  pip install flask flask-wtf pytest pytest-cov
+
       - name: Unit Test
         run: |
           coverage run --source=app -m pytest test.py
